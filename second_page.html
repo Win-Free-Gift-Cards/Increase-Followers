@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Page</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    #loadingContainer {
+      max-width: 400px;
+      margin: 100px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #loadingMessage {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    #loadingProgress {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .buttonContainer {
+      display: none;
+    }
+
+    .buttonContainer button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .buttonContainer button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .buttonContainer button:hover {
+      background-color: #2980b9;
+    }
+
+    #claimButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #claimButton:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    #claimButton:hover {
+      background-color: #2980b9;
+    }
+
+    .clickCounters {
+      display: none;
+    }
+  </style>
+  <script>
+    let button1Clicks = 0;
+    let button2Clicks = 0;
+    let button3Clicks = 0;
+
+    function startLoading() {
+      // Display the loading message
+      document.getElementById('loadingMessage').innerHTML = 'Generating, please wait...';
+
+      // Simulate loading up to 90%
+      let progress = 0;
+      const interval = setInterval(function() {
+        progress += 10;
+        if (progress <= 90) {
+          document.getElementById('loadingProgress').innerHTML = `Loading: ${progress}%`;
+        } else {
+          // Display the message to click the buttons
+          document.getElementById('loadingMessage').innerHTML = '<b>Click on the following buttons 10 times each To Claim:</b></b>';
+          clearInterval(interval);
+          // Show the button container
+          document.querySelector('.buttonContainer').style.display = 'flex';
+          // Show the click counters
+          document.querySelector('.clickCounters').style.display = 'block';
+        }
+      }, 1000);
+    }
+
+    function buttonClick(buttonId) {
+      // Increment button click counter
+      if (buttonId === 'button1') {
+        button1Clicks++;
+        document.getElementById('button1Counter').innerHTML = `Button 1 Clicks: ${button1Clicks}`;
+      } else if (buttonId === 'button2') {
+        button2Clicks++;
+        document.getElementById('button2Counter').innerHTML = `Button 2 Clicks: ${button2Clicks}`;
+      } else if (buttonId === 'button3') {
+        button3Clicks++;
+        document.getElementById('button3Counter').innerHTML = `Button 3 Clicks: ${button3Clicks}`;
+      }
+
+      // Check if all buttons are clicked 10 times
+      if (button1Clicks === 10 && button2Clicks === 10 && button3Clicks === 10) {
+        // Enable the claim button
+        document.getElementById('claimButton').disabled = false;
+      }
+
+      // Redirect to the link associated with the button in a new tab
+      const buttonLinks = {
+        'button1': 'https://www.highratecpm.com/wbwgf670?key=6bc24a4aac566e97e4ea1b819898c795',
+        'button2': 'https://www.highratecpm.com/wbwgf670?key=6bc24a4aac566e97e4ea1b819898c795',
+        'button3': 'https://www.highratecpm.com/wbwgf670?key=6bc24a4aac566e97e4ea1b819898c795',
+      };
+      window.open(buttonLinks[buttonId], '_blank');
+    }
+
+    function claimReward() {
+      // Redirect to the provided URL in a new tab
+      window.open('https://www.highratecpm.com/wbwgf670?key=6bc24a4aac566e97e4ea1b819898c795', '_blank');
+    }
+  </script>
+</head>
+<body onload="startLoading()">
+  <div id="loadingContainer">
+    <div id="loadingMessage"></div>
+    <div id="loadingProgress"></div>
+
+    <!-- Buttons to click -->
+    <div class="buttonContainer">
+      <button id="button1" onclick="buttonClick('button1')">Button 1</button>
+      <button id="button2" onclick="buttonClick('button2')">Button 2</button>
+      <button id="button3" onclick="buttonClick('button3')">Button 3</button>
+    </div>
+
+    <!-- Click counters -->
+    <div class="clickCounters">
+      <div id="button1Counter">Button 1 Clicks: 0</div>
+      <div id="button2Counter">Button 2 Clicks: 0</div>
+      <div id="button3Counter">Button 3 Clicks: 0</div>
+    </div>
+
+    <!-- Claim button -->
+    <button id="claimButton" onclick="claimReward()" disabled>Claim</button>
+  </div>
+</body>
+</html>
